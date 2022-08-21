@@ -38,3 +38,17 @@ app.post("/get-delivery-rate", async (req, res) => {
 
   res.send(response);
 });
+
+app.post("/create-delivery", async (req, res) => {
+  const client = new DoorDashClient({
+    developer_id: process.env.DEVELOPER_ID,
+    key_id: process.env.KEY_ID,
+    signing_secret: process.env.SIGNING_SECRET,
+  });
+
+  const response = await client.deliveryQuoteAccept(
+    "1265962c-7ab9-4563-bca0-a106cc0b2fb8"
+  );
+
+  res.send(response);
+});
