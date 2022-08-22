@@ -26,6 +26,12 @@ app.listen(port, (err) => {
 
 app.use(express.static(__dirname + "/public"));
 
+app.set("view engine", "pug");
+
+app.get("/order", (req, res) => {
+  res.render("order");
+});
+
 app.post("/get-delivery-rate", async (req, res) => {
   const client = new DoorDashClient({
     developer_id: process.env.DEVELOPER_ID,
@@ -59,5 +65,20 @@ app.post("/create-delivery", async (req, res) => {
     "1265962c-7ab9-4563-bca0-a106cc0b2fb8"
   );
 
-  res.send(response);
+  const clothingTotal = (response.data.order_value / 100).toFixed(2);
+  const feeTotal = (response.data.fee / 100).toFixed(2);
+  const orderTotal = Number(clothingTotal) + Number(feeTotal);
+
+  const data = {
+    clothingTotal: clothingTotal,
+    feeTotal: feeTotal,
+    orderTotal: orderTotal,
+  };
+
+  res.render("order", {
+    clothingTotal: data.clothingTotal,
+    feeTotal: data.feeTotal,
+    orderTotal: data.orderTotal,
+  });
+  console.log("ACCEPT", response);
 });
