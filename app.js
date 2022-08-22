@@ -41,9 +41,9 @@ app.post("/get-delivery-rate", async (req, res) => {
 
   const response = await client.deliveryQuote({
     external_delivery_id: uuidv4(),
-    pickup_address: "4344 University Way NE, Seattle, WA 98105",
+    pickup_address: "11 Madison Ave, New York, NY 10010",
     pickup_phone_number: "+1(650)5555555",
-    pickup_business_name: "Sunrise Apparel",
+    pickup_business_name: "Top Clothing",
     dropoff_address: `${req.body.street}, ${req.body.city}, ${req.body.zipcode}`,
     dropoff_phone_number: req.body.dropoff_phone_number,
     dropoff_contact_given_name: req.body.dropoff_contact_given_name,
@@ -52,6 +52,7 @@ app.post("/get-delivery-rate", async (req, res) => {
   });
 
   res.send(response);
+  console.log("QUOTE", response);
 });
 
 app.post("/create-delivery", async (req, res) => {
@@ -62,7 +63,7 @@ app.post("/create-delivery", async (req, res) => {
   });
 
   const response = await client.deliveryQuoteAccept(
-    "1265962c-7ab9-4563-bca0-a106cc0b2fb8"
+    "fe234c77-4c48-41ba-9c02-7c74a6f172bb"
   );
 
   const clothingTotal = (response.data.order_value / 100).toFixed(2);
