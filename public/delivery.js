@@ -52,3 +52,35 @@ function getFee() {
         console.log("Fill Out The Form");
     }
 }
+
+async function createDelivery() {
+    const payload = getFormValues();
+    const finalPayload = JSON.stringify(payload);
+
+    const formInput = document.querySelector("form");
+
+    const menuBoxes = document.querySelectorAll("input[type=checkbox]:checked");
+
+    if (formInput.checkValidity() && menuBoxes.length > 0) {
+        const response = await fetch("/create-delivery", {
+            method: "POST",
+            body: finalPayload,
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((response) => {
+                const resp = response.text();
+                return resp;
+            }).catch((rejected) => {
+                console.log(rejected);
+                return false
+            });
+        
+        if (response) {
+            document.documentElement.innerHTML = response
+        }
+    } else if (formInput.checkValidity() && menuBoxes.length === 0) {
+        alert("Please select a Menu Item");
+    } else {
+        return;
+    }
+}
