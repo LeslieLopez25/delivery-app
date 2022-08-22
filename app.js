@@ -63,7 +63,7 @@ app.post("/create-delivery", async (req, res) => {
   });
 
   const response = await client.deliveryQuoteAccept(
-    "fe234c77-4c48-41ba-9c02-7c74a6f172bb"
+    "81754370-01da-4da2-9f19-31500e676e3c"
   );
 
   const clothingTotal = (response.data.order_value / 100).toFixed(2);
