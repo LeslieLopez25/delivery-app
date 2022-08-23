@@ -3,7 +3,7 @@ window.menuItems = 0;
 const street = document.getElementById("street");
 const city = document.getElementById("city");
 const zipcode = document.getElementById("zipcode");
-const fname = document.getElementById("fname");
+const fname = document.getElementById("name");
 const lastname = document.getElementById("lastname");
 const phonenumber = document.getElementById("phonenumber");
 
