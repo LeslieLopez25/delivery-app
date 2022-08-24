@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 import path from "path";
 import { fileURLToPath } from "url";
 import { v4 as uuidv4 } from "uuid";
@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.listen(port, (err) => {
+app.listen(process.env.port || 3000, (err) => {
   if (err) {
     return console.log("ERROR", err);
   }
